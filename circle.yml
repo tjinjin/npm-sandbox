@@ -4,7 +4,7 @@ machine:
 
 test:
   pre:
-    -echo 'test'
+    - echo 'test'
 
 deployment:
   master:
