@@ -13,4 +13,5 @@ deployment:
       - npm install
       - cd dist && tar xzf resource.tgz && mv $CIRCLE_ARTIFACTS/
       - aws s3 cp $CIRCLE_ARTIFACTS/resource.tgz $S3_BUCKET/assets/
+      - echo 'create manifest'
       - echo 'kickstart tasks'
