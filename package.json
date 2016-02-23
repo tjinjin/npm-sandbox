@@ -1,0 +1,15 @@
+{
+  "name": "npm-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "jade ./src --out ./dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jade": "^1.11.0"
+  }
+}
