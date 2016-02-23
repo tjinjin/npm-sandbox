@@ -1,3 +1,14 @@
 machine:
   node:
     version:4.2.6
+
+test:
+  pre:
+    -echo 'test'
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - echo 'upload tasks'
+      - echo 'kickstart tasks'
