@@ -1,0 +1,20 @@
+src: s3://tjinjin-upload-cirlcleci/assets/front.tgz
+checksum: <%= checksum %>
+dest: /var/www/npm-sandbox/releases/<%= time %>
+commands:
+  pre:
+     -
+  post:
+    - ln -nfs /var/www/npm-sandbox/releases/<%= time %> /var/www/npm-sandbox/current
+     - chown app. /var/www/npm-sandbox/current/ -R
+
+  success:
+     - echo 'deploy success!!' > /tmp/success
+     - /var/www/npm-sandbox/current/script/register_kv.sh 0 /tmp/success
+  failure:
+     - cat > /tmp/failure
+     - /var/www/npm-sandbox/current/script/register_kv.sh 2 /tmp/failure
+
+excludes:
+  - "*.pid"
+  - "*.socket"
