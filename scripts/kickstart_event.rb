@@ -7,7 +7,7 @@ def environment
 end
 
 def consul_host
-  'test-deploy.tjinjin.net'
+  'deploy-test.tjinjin.net'
 end
 
 system <<-EOC
