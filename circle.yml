@@ -1,0 +1,24 @@
+machine:
+  node:
+    version: 4.2.2
+  ruby:
+    version: 2.3.0
+
+dependencies:
+  pre:
+    - sudo pip install awscli
+
+test:
+  pre:
+    - echo 'test'
+
+deployment:
+  master:
+    branch: master
+    commands:
+    - npm start
+    - cd dist && tar czf resource.tgz * && mv resource.tgz $CIRCLE_ARTIFACTS/
+    - ruby scripts/create_manifest.rb
+    - aws s3 cp $CIRCLE_ARTIFACTS/resource.tgz $S3_BUCKET/assets/
+    - aws s3 cp $CIRCLE_ARTIFACTS/manifest_web_development.yml $S3_BUCKET/manifests/
+    - ruby scripts/kickstart_event.rb
