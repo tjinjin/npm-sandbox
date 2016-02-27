@@ -12,7 +12,7 @@ test:
   pre:
     - echo 'test'
   post:
-    - npm install
+    - npm start
     - cd dist && tar czf resource.tgz * && mv $CIRCLE_ARTIFACTS/
     - ruby scripts/create_manifest.rb
     - aws s3 cp $CIRCLE_ARTIFACTS/resource.tgz $S3_BUCKET/assets/
