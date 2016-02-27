@@ -10,10 +10,8 @@ commands:
 
   success:
      - echo 'deploy success!!' > /tmp/success
-     - /var/www/npm-sandbox/current/script/register_kv.sh 0 /tmp/success
   failure:
      - cat > /tmp/failure
-     - /var/www/npm-sandbox/current/script/register_kv.sh 2 /tmp/failure
 
 excludes:
   - "*.pid"
