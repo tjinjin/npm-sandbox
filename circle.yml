@@ -11,14 +11,16 @@ dependencies:
 test:
   pre:
     - echo 'test'
+  post:
+    - npm install
+    - cd dist && tar czf resource.tgz * && mv $CIRCLE_ARTIFACTS/
+    - ruby scripts/create_manifest.rb
+    - aws s3 cp $CIRCLE_ARTIFACTS/resource.tgz $S3_BUCKET/assets/
+    - aws s3 cp $CIRCLE_ARTIFACTS/manifest_web_development.yml $S3_BUCKET/manifests/
+
 
 deployment:
   master:
     branch: master
     commands:
-      - npm install
-      - cd dist && tar czf resource.tgz * && mv $CIRCLE_ARTIFACTS/
-      - ruby scripts/create_manifest.rb
-      - aws s3 cp $CIRCLE_ARTIFACTS/resource.tgz $S3_BUCKET/assets/
-      - aws s3 cp $CIRCLE_ARTIFACTS/manifest_web_development.yml $S3_BUCKET/manifests/
       - ruby scripts/kickstart_event.rb
