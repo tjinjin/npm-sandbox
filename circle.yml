@@ -18,6 +18,7 @@ deployment:
     commands:
       - npm install
       - cd dist && tar czf resource.tgz * && mv $CIRCLE_ARTIFACTS/
+      - ruby scripts/create_manifest.rb
       - aws s3 cp $CIRCLE_ARTIFACTS/resource.tgz $S3_BUCKET/assets/
-      - echo 'create manifest'
-      - echo 'kickstart tasks'
+      - aws s3 cp $CIRCLE_ARTIFACTS/manifest_web_development.yml $S3_BUCKET/manifests/
+      - ruby scripts/kickstart_event.rb
